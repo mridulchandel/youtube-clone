@@ -1,0 +1,9 @@
+.searchBarContainer {
+  border: 1.5px solid lighten(gray, 20);
+  overflow: hidden;
+  padding-left: 1rem;
+
+  input {
+    width: 100vw;
+  }
+}

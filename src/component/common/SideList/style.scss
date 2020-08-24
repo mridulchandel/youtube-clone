@@ -1,0 +1,28 @@
+.sideList-container {
+  li {
+    padding-left: 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    p {
+      margin: 0;
+    }
+    &:hover {
+      background-color: var(--gray);
+      cursor: pointer;
+    }
+  }
+  .active {
+    background-color: var(--gray) !important;
+    color: var(--danger);
+  }
+}
+
+@media (min-width: 75rem) {
+  .sideList-container {
+    li {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+    }
+  }
+}

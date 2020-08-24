@@ -1,0 +1,15 @@
+.sideBar-container {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100vh - 12vh;
+}
+
+.sideBar-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.sideBar-container {
+  --ms-overflow-style: none; /* IE and Edge*/
+  scrollbar-width: none; /* Firefox */
+}
