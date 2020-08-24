@@ -17,8 +17,8 @@ const VideoListCard = ({
       <Card.Body>
         <div className="title">{title}</div>
         <Card.Text class="text">
-          {channelTitle}
-          {`\n${views} views . ${uploaded} ago`}
+          {channelTitle} &middot;
+          {`\n${views} views`} &middot; {`${uploaded} ago`}
         </Card.Text>
       </Card.Body>
     </Card>

@@ -17,7 +17,6 @@ const MainScreen = ({ selectedNav, handleNavigationClick }) => {
   }, []);
 
   const handlingVideoList = () => {
-    console.log(reduxState);
     if (!isEmpty(reduxState)) {
       if (!isEmpty(reduxState.fetchVideos)) {
         return <HomeVideosList fetchedVideos={reduxState.fetchVideos} />;

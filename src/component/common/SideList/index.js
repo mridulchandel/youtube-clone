@@ -8,6 +8,7 @@ const SideList = ({ list, selectedNav, handleNavigationClick }) => {
     <ul className="sideList-container pl-2 list-unstyled">
       {list.map((listItem) => (
         <li
+          key={listItem.iconName}
           className={`py-2 ${
             selectedNav === listItem.iconName ? "active" : null
           }`}

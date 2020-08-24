@@ -25,21 +25,6 @@ const SideBar = ({ selectedNav, handleNavigationClick }) => {
       { iconName: "Watch Later", iconSymbol: faClock },
       { iconName: "Liked Videos", iconSymbol: faThumbsUp },
     ],
-    [
-      { iconName: "Home", iconSymbol: faHome },
-      { iconName: "Trending", iconSymbol: faFire },
-      { iconName: "Subscription", iconSymbol: faYoutube },
-    ],
-    [
-      { iconName: "Home", iconSymbol: faHome },
-      { iconName: "Trending", iconSymbol: faFire },
-      { iconName: "Subscription", iconSymbol: faYoutube },
-    ],
-    [
-      { iconName: "Home", iconSymbol: faHome },
-      { iconName: "Trending", iconSymbol: faFire },
-      { iconName: "Subscription", iconSymbol: faYoutube },
-    ],
   ];
   return (
     <SideBarScreen

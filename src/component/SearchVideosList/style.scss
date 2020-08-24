@@ -1,0 +1,36 @@
+@import "../common/commonStyle";
+.searchVideoList-component {
+  background-color: var(--light-gray);
+  cursor: pointer;
+  .searchVideoList-subSection {
+    padding: 1rem;
+    width: 90%;
+    img {
+      width: 100%;
+    }
+    .searchVideoList-text {
+      max-width: 40rem;
+      margin: 1rem 0;
+      h6 {
+        font-weight: 600;
+      }
+      p {
+        @extend .video-sub-text;
+      }
+    }
+  }
+}
+
+@media (min-width: 40rem) {
+  .searchVideoList-component {
+    .searchVideoList-subSection {
+      display: flex;
+      img {
+        max-width: 20rem;
+      }
+      .searchVideoList-text {
+        margin: 0 1rem;
+      }
+    }
+  }
+}

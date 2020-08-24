@@ -1,3 +1,5 @@
+@import "../commonStyle";
+
 .video-list-card-container {
   background-color: transparent;
   border: none;
@@ -12,8 +14,6 @@
     font-weight: 600;
   }
   .text {
-    font-size: 0.8rem;
-    font-weight: 550;
-    opacity: 0.6;
+    @extend .video-sub-text;
   }
 }

@@ -33,7 +33,6 @@ const Router = (props) => {
     history.push(`results?search_query=${searchValue}`);
   }, [history, searchValue]);
 
-  console.log(searchValue);
   return (
     <>
       <Header

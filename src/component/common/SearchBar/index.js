@@ -21,6 +21,7 @@ const SearchBar = ({
         id="searchBar"
         value={searchValue}
         onChange={(e) => handleSearchValue(e.target.value)}
+        onKeyDown={(e) => e.keyCode == 13 && handleSearchClick()}
       />
       <Button variant="light" className="rounded-0" onClick={handleSearchClick}>
         <FontAwesomeIcon icon={faSearch} className="text-muted" />

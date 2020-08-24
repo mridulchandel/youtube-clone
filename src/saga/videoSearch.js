@@ -3,10 +3,13 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import YOUTUBEDATA from "../dummyData/videoLIst.json";
 import {
   GET_HOME_VIDEOS,
-  GET_SEARCH_VIDEOS,
   LOADING_VIDEOS,
   VIDEO_FETCH_SUCCESS,
   VIDEO_FETCH_FAIL,
+  GET_SEARCH_VIDEOS,
+  LOADING_SEARCH_VIDEOS,
+  VIDEO_SEARCH_SUCCESS,
+  VIDEO_SEARCH_FAIL,
 } from "../action/constants";
 import { getData } from "../webServices";
 import { config } from "../config/youtubeConfig";
@@ -50,12 +53,11 @@ function* fetchHomeVideos(action) {
 
 function* fetchSearchVideos(action) {
   try {
-    yield put({ type: LOADING_VIDEOS });
+    yield put({ type: LOADING_SEARCH_VIDEOS });
     // const data = yield call(
     //   getData,
     //   `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${action.searchValue}&type=video&key=${config.api_key}`
     // );
-    console.log(data, "data");
     const data = YOUTUBEDATA;
     data.success = true;
     if (data.success) {
@@ -77,12 +79,12 @@ function* fetchSearchVideos(action) {
           views: "30k",
         };
       });
-      yield put({ type: VIDEO_FETCH_SUCCESS, data: fetchData });
+      yield put({ type: VIDEO_SEARCH_SUCCESS, data: fetchData });
     } else {
-      yield put({ type: VIDEO_FETCH_FAIL, errorMsg: data.errorMessage });
+      yield put({ type: VIDEO_SEARCH_FAIL, errorMsg: data.errorMessage });
     }
   } catch (error) {
-    yield put({ type: VIDEO_FETCH_FAIL, errorMsg: error.errorMessage });
+    yield put({ type: VIDEO_SEARCH_FAIL, errorMsg: error.errorMessage });
   }
 }
 
