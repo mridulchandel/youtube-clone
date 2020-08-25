@@ -1,9 +1,14 @@
 import React, { Fragment } from "react";
+import { useHistory } from "react-router-dom";
 import HomeVideosListScreen from "../../component/HomeVideosList";
 
 import "./style.scss";
 
 const HomeVideosList = ({ fetchedVideos }) => {
+  let history = useHistory();
+  const handleVideoClick = (videoId) => {
+    history.push(`watch?v=${videoId}`);
+  };
   const renderingVideoList = () => {
     return fetchedVideos.map((videoDetail) => {
       const {
@@ -21,11 +26,13 @@ const HomeVideosList = ({ fetchedVideos }) => {
           channelTitle={channelTitle}
           views={views}
           thumbnail={thumbnails.medium}
+          videoId={videoId}
+          handleVideoClick={handleVideoClick}
         />
       );
     });
   };
-  return <div class="homeVideoList-container p-2">{renderingVideoList()}</div>;
+  return <div class="homeVideoList-container py-2">{renderingVideoList()}</div>;
 };
 
 export default HomeVideosList;

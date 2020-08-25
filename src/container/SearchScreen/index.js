@@ -1,25 +1,30 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { Container, Col, Row } from "react-bootstrap";
 import { isEmpty } from "lodash";
 
 import { getSearchVideos } from "../../action";
 import SideBar from "../SideBar";
 import SearchVideosList from "../../component/SearchVideosList";
+import { getSearchParam } from "../../utility/utility";
 
 const Search = ({ selectedNav, handleNavigationClick }) => {
   const dispatch = useDispatch();
   const reduxState = useSelector((state) => state.videoSearch);
 
   let location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const searchValue = params.get("search_query");
+  const searchValue = getSearchParam(location.search, "search_query");
 
   useEffect(() => {
     dispatch(getSearchVideos(searchValue));
   }, [searchValue, getSearchVideos]);
+
+  let history = useHistory();
+  const handleVideoClick = (videoId) => {
+    history.push(`watch?v=${videoId}`);
+  };
 
   const handlingVideoList = () => {
     if (!isEmpty(reduxState)) {
@@ -41,6 +46,8 @@ const Search = ({ selectedNav, handleNavigationClick }) => {
               channelTitle={channelTitle}
               views={views}
               thumbnail={thumbnails.medium}
+              videoId={videoId}
+              handleVideoClick={handleVideoClick}
             />
           );
         });

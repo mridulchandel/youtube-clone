@@ -1,6 +1,7 @@
 import { all } from "redux-saga/effects";
-import { watchVideoFetch } from "./videoSearch";
+import { searchVideoFetch } from "./videoSearch";
+import { watchVideoFetch } from "./videoWatch";
 
 export function* rootSaga() {
-  yield all([watchVideoFetch()]);
+  yield all([searchVideoFetch(), watchVideoFetch()]);
 }

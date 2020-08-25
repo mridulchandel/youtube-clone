@@ -11,9 +11,14 @@ function Search({
   channelIcon,
   views,
   uploaded,
+  videoId,
+  handleVideoClick,
 }) {
   return (
-    <section className="searchVideoList-component">
+    <section
+      className="searchVideoList-component"
+      onClick={() => handleVideoClick(videoId)}
+    >
       <div className="searchVideoList-subSection">
         <img src={thumbnail.url} />
         <div className="searchVideoList-text">

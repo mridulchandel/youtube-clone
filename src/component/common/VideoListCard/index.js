@@ -10,9 +10,14 @@ const VideoListCard = ({
   channelIcon,
   views,
   uploaded,
+  videoId,
+  handleVideoClick,
 }) => {
   return (
-    <Card className="video-list-card-container">
+    <Card
+      className="video-list-card-container"
+      onClick={() => handleVideoClick(videoId)}
+    >
       <Card.Img variant="top" src={thumbnail.url} />
       <Card.Body>
         <div className="title">{title}</div>

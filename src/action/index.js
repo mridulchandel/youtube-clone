@@ -1,3 +1,14 @@
-import { getHomeVideos, getSearchVideos } from "./videoSearch";
+import {
+  getHomeVideos,
+  getSearchVideos,
+  getWatchSearchVideos,
+} from "./videoSearch";
 
-export { getHomeVideos, getSearchVideos };
+import { getWatchVideoDetails } from "./videoWatch";
+
+export {
+  getHomeVideos,
+  getSearchVideos,
+  getWatchSearchVideos,
+  getWatchVideoDetails,
+};

@@ -10,19 +10,23 @@ import {
   LOADING_SEARCH_VIDEOS,
   VIDEO_SEARCH_SUCCESS,
   VIDEO_SEARCH_FAIL,
+  GET_WATCH_SEARCH_VIDEOS,
+  LOADING_WATCH_SEARCH_VIDEOS,
+  VIDEO_WATCH_SEARCH_SUCCESS,
+  VIDEO_WATCH_SEARCH_FAIL,
 } from "../action/constants";
 import { getData } from "../webServices";
-import { config } from "../config/youtubeConfig";
+import { getSearchApi } from "../utility/api";
 
-function* fetchHomeVideos(action) {
+function* search(action, LOADING, VIDEO_SUCCESS, VIDEO_FAIL) {
   try {
-    yield put({ type: LOADING_VIDEOS });
-    // const data = yield call(
-    //   getData,
-    //   `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=songs&type=video&key=${config.api_key}`
-    // );
-    const data = YOUTUBEDATA;
-    data.success = true;
+    yield put({ type: LOADING });
+    const getApi = action.searchValue
+      ? getSearchApi(action.searchValue)
+      : getSearchApi();
+    const data = yield call(getData, getApi);
+    // const data = YOUTUBEDATA;
+    // data.success = true;
     if (data.success) {
       const fetchData = data.items.map((item) => {
         const {
@@ -42,53 +46,47 @@ function* fetchHomeVideos(action) {
           views: "30k",
         };
       });
-      yield put({ type: VIDEO_FETCH_SUCCESS, data: fetchData });
+      yield put({ type: VIDEO_SUCCESS, data: fetchData });
     } else {
-      yield put({ type: VIDEO_FETCH_FAIL, errorMsg: data.errorMessage });
+      yield put({ type: VIDEO_FAIL, errorMsg: data.errorMessage });
     }
   } catch (error) {
-    yield put({ type: VIDEO_FETCH_FAIL, errorMsg: error.errorMessage });
+    yield put({ type: VIDEO_FAIL, errorMsg: error.errorMessage });
   }
+}
+
+function* fetchHomeVideos(action) {
+  yield call(
+    search,
+    action,
+    LOADING_VIDEOS,
+    VIDEO_FETCH_SUCCESS,
+    VIDEO_FETCH_FAIL
+  );
 }
 
 function* fetchSearchVideos(action) {
-  try {
-    yield put({ type: LOADING_SEARCH_VIDEOS });
-    // const data = yield call(
-    //   getData,
-    //   `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${action.searchValue}&type=video&key=${config.api_key}`
-    // );
-    const data = YOUTUBEDATA;
-    data.success = true;
-    if (data.success) {
-      const fetchData = data.items.map((item) => {
-        const {
-          title,
-          channelTitle,
-          publishedAt,
-          thumbnails,
-          channelId,
-        } = item.snippet;
-        return {
-          videoId: item.id.videoId,
-          title,
-          channelTitle,
-          thumbnails,
-          channelId,
-          publishedAt,
-          views: "30k",
-        };
-      });
-      yield put({ type: VIDEO_SEARCH_SUCCESS, data: fetchData });
-    } else {
-      yield put({ type: VIDEO_SEARCH_FAIL, errorMsg: data.errorMessage });
-    }
-  } catch (error) {
-    yield put({ type: VIDEO_SEARCH_FAIL, errorMsg: error.errorMessage });
-  }
+  yield call(
+    search,
+    action,
+    LOADING_SEARCH_VIDEOS,
+    VIDEO_SEARCH_SUCCESS,
+    VIDEO_SEARCH_FAIL
+  );
 }
 
-export function* watchVideoFetch() {
+function* fetchWatchSearchVideos(action) {
+  yield call(
+    search,
+    action,
+    LOADING_WATCH_SEARCH_VIDEOS,
+    VIDEO_WATCH_SEARCH_SUCCESS,
+    VIDEO_WATCH_SEARCH_FAIL
+  );
+}
+
+export function* searchVideoFetch() {
   yield takeLatest(GET_HOME_VIDEOS, fetchHomeVideos);
   yield takeLatest(GET_SEARCH_VIDEOS, fetchSearchVideos);
+  yield takeLatest(GET_WATCH_SEARCH_VIDEOS, fetchWatchSearchVideos);
 }
