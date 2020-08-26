@@ -30,7 +30,7 @@ const MainScreen = ({ selectedNav, handleNavigationClick }) => {
 
   return (
     <div>
-      <Row>
+      <Row className="m-0">
         <Col xs={2} className="p-0">
           <SideBar
             selectedNav={selectedNav}

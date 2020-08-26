@@ -5,7 +5,7 @@ import "./style.scss";
 
 const SideList = ({ list, selectedNav, handleNavigationClick }) => {
   return (
-    <ul className="sideList-container pl-2 list-unstyled">
+    <ul className="sideList-container list-unstyled">
       {list.map((listItem) => (
         <li
           key={listItem.iconName}

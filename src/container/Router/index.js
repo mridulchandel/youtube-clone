@@ -11,7 +11,7 @@ import {
 
 import MainScreen from "../MainScreen";
 import SearchScreen from "../SearchScreen";
-import VideoPlayer from "../VideoPlayer";
+import VideoPlayerScreen from "../VideoPlayerScreen";
 import Header from "../Header";
 import { getSearchParam } from "../../utility/utility";
 
@@ -58,7 +58,7 @@ const Router = (props) => {
           />
         </Route>
         <Route path="/watch">
-          <VideoPlayer />
+          <VideoPlayerScreen />
         </Route>
         <Route path="/">
           <MainScreen

@@ -68,7 +68,10 @@ function VideoPlayer(props) {
   }, [title, getWatchSearchVideos]);
   return (
     <div>
-      <VideoPlayerScreen videoId={videoId} />
+      <VideoPlayerScreen
+        videoId={videoId}
+        videoDetail={watchState.fetchWatchDetails}
+      />
       {handlingVideoList()}
     </div>
   );

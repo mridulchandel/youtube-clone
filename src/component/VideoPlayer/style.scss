@@ -1,3 +1,51 @@
+@import "../common/commonStyle";
+
 .videoPlayer-component {
   background-color: var(--light-gray);
+  .videoPlayer-detail {
+    .videoPlayer-mainDetail {
+      & > p {
+        display: inline-block;
+        color: var(--primary);
+      }
+      .videoPlayer-subDetail {
+        @extend .video-sub-text;
+        font-size: 1rem;
+        .videoPlayer-otherDetail {
+          flex: 0.2;
+          display: flex;
+          justify-content: space-between;
+          span {
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+    }
+    .videoPlayer-channelDetail {
+      display: flex;
+      img {
+        width: clamp(3rem, 5vw, 8rem);
+        height: clamp(3rem, 5vw, 8rem);
+      }
+      .videoPlayer-videoDesc {
+      }
+    }
+  }
+}
+
+@media (min-width: 40rem) {
+  .videoPlayer-component {
+    .videoPlayer-detail {
+      .videoPlayer-mainDetail {
+        .videoPlayer-subDetail {
+          display: flex;
+          justify-content: space-between;
+          .videoPlayer-otherDetail {
+            display: flex;
+          }
+        }
+      }
+    }
+  }
 }
