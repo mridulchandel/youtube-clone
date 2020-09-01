@@ -6,14 +6,24 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import YoutubeLogo from "../common/YoutubeLogo";
 import SearchBar from "../common/SearchBar";
 import "./style.scss";
-const Header = ({ searchValue, handleSearchValue, handleSearchClick }) => {
+const Header = ({
+  searchValue,
+  showSideBar,
+  handleSearchValue,
+  handleSearchClick,
+}) => {
   return (
     <Container
       fluid
       className="header-component d-flex py-4 justify-content-between"
     >
       <div className="header-subComponent d-flex justify-content-between">
-        <FontAwesomeIcon icon={faBars} size="2x" />
+        <FontAwesomeIcon
+          icon={faBars}
+          size="2x"
+          onClick={showSideBar}
+          className="header-component-barIcon"
+        />
         <YoutubeLogo size="2x" />
       </div>
       <SearchBar

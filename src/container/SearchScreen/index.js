@@ -10,7 +10,7 @@ import SideBar from "../SideBar";
 import SearchVideosList from "../../component/SearchVideosList";
 import { getSearchParam } from "../../utility/utility";
 
-const Search = ({ selectedNav, handleNavigationClick }) => {
+const Search = ({ listGroup, selectedNav, handleNavigationClick }) => {
   const dispatch = useDispatch();
   const reduxState = useSelector((state) => state.videoSearch);
 
@@ -64,6 +64,7 @@ const Search = ({ selectedNav, handleNavigationClick }) => {
       <Row>
         <Col xs={2} className="p-0">
           <SideBar
+            listGroup={listGroup}
             selectedNav={selectedNav}
             handleNavigationClick={handleNavigationClick}
           />

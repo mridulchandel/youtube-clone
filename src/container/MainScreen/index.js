@@ -7,8 +7,9 @@ import { isEmpty, map } from "lodash";
 import SideBar from "../SideBar";
 import HomeVideosList from "../HomeVideosList";
 import { getHomeVideos } from "../../action";
+import "./style.scss";
 
-const MainScreen = ({ selectedNav, handleNavigationClick }) => {
+const MainScreen = ({ listGroup, selectedNav, handleNavigationClick }) => {
   const dispatch = useDispatch();
   const reduxState = useSelector((state) => state.videoSearch);
 
@@ -17,30 +18,23 @@ const MainScreen = ({ selectedNav, handleNavigationClick }) => {
   }, []);
 
   const handlingVideoList = () => {
-    if (!isEmpty(reduxState)) {
-      if (!isEmpty(reduxState.fetchVideos)) {
-        return <HomeVideosList fetchedVideos={reduxState.fetchVideos} />;
-      } else if (!isEmpty(reduxState.errorMsg)) {
-        return <p>{reduxState.errorMsg}</p>;
-      } else {
-        return <p>Loading...</p>;
-      }
+    if (isEmpty(reduxState.errorMsg)) {
+      return (
+        <HomeVideosList fetchedVideos={reduxState && reduxState.fetchVideos} />
+      );
+    } else {
+      return <p>{reduxState.errorMsg}</p>;
     }
   };
 
   return (
-    <div>
-      <Row className="m-0">
-        <Col xs={2} className="p-0">
-          <SideBar
-            selectedNav={selectedNav}
-            handleNavigationClick={handleNavigationClick}
-          />
-        </Col>
-        <Col xs={10} className="p-0">
-          {handlingVideoList()}
-        </Col>
-      </Row>
+    <div className="mainScreen">
+      <SideBar
+        listGroup={listGroup}
+        selectedNav={selectedNav}
+        handleNavigationClick={handleNavigationClick}
+      />
+      {handlingVideoList()}
     </div>
   );
 };

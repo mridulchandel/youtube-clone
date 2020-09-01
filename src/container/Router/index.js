@@ -8,17 +8,44 @@ import {
   useHistory,
   useLocation,
 } from "react-router-dom";
+import {
+  faHome,
+  faFire,
+  faBook,
+  faHistory,
+  faClock,
+  faThumbsUp,
+} from "@fortawesome/free-solid-svg-icons";
+import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 
 import MainScreen from "../MainScreen";
 import SearchScreen from "../SearchScreen";
 import VideoPlayerScreen from "../VideoPlayerScreen";
 import Header from "../Header";
 import { getSearchParam } from "../../utility/utility";
+import SideBarModal from "../../component/SideBarModal";
+import BackDrop from "../../component/common/Backdrop";
 
 const Router = (props) => {
   const history = useHistory();
   const [selectedNav, setSelectedNav] = useState("Home");
   const [searchValue, setSearchValue] = useState("");
+  const [showSideBar, setShowSideBar] = useState(false);
+
+  const listGroup = [
+    [
+      { iconName: "Home", iconSymbol: faHome },
+      { iconName: "Trending", iconSymbol: faFire },
+      { iconName: "Subscription", iconSymbol: faYoutube },
+    ],
+    [
+      { iconName: "Library", iconSymbol: faBook },
+      { iconName: "History", iconSymbol: faHistory },
+      { iconName: "Your Videos", iconSymbol: faYoutube },
+      { iconName: "Watch Later", iconSymbol: faClock },
+      { iconName: "Liked Videos", iconSymbol: faThumbsUp },
+    ],
+  ];
 
   let location = useLocation();
   useEffect(() => {
@@ -45,14 +72,27 @@ const Router = (props) => {
 
   return (
     <>
+      {showSideBar && (
+        <>
+          <BackDrop onDismiss={() => setShowSideBar(false)} />
+          <SideBarModal
+            listGroup={listGroup}
+            selectedNav={selectedNav}
+            handleNavigationClick={handleNavigationClick}
+          />
+        </>
+      )}
+
       <Header
         searchValue={searchValue}
+        showSideBar={() => setShowSideBar(true)}
         handleSearchValue={handleSearchValue}
         handleSearchClick={handleSearchClick}
       />
       <Switch>
         <Route path="/results">
           <SearchScreen
+            listGroup={listGroup}
             selectedNav={selectedNav}
             handleNavigationClick={handleNavigationClick}
           />
@@ -62,6 +102,7 @@ const Router = (props) => {
         </Route>
         <Route path="/">
           <MainScreen
+            listGroup={listGroup}
             selectedNav={selectedNav}
             handleNavigationClick={handleNavigationClick}
           />

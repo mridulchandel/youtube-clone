@@ -1,7 +1,12 @@
 .sideBar-container {
+  width: 100vw;
   overflow-y: scroll;
   overflow-x: hidden;
   height: 100vh - 12vh;
+  display: none;
+  @media (min-width: 50rem) {
+    display: block;
+  }
 }
 
 .sideBar-container::-webkit-scrollbar {

@@ -1,6 +1,10 @@
 .homeVideoList-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   background-color: var(--light-gray);
+  & > * {
+    flex-basis: 24%;
+    min-width: 15rem;
+  }
 }

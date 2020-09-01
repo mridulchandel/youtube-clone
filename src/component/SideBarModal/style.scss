@@ -1,0 +1,21 @@
+.sideBarModal-container {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  background-color: white;
+  width: 40vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100vh;
+  opacity: 1;
+}
+
+.sideBarModal-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.sideBarModal-container {
+  --ms-overflow-style: none; /* IE and Edge*/
+  scrollbar-width: none; /* Firefox */
+}

@@ -14,10 +14,7 @@
     background-color: var(--gray) !important;
     color: var(--danger);
   }
-}
-
-@media (min-width: 75rem) {
-  .sideList-container {
+  @media (min-width: 75rem) {
     li {
       display: flex;
       align-items: center;

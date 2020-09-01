@@ -1,5 +1,11 @@
 .header-component {
   .header-subComponent {
     width: clamp(12rem, 20vw, 15rem);
+    .header-component-barIcon {
+      cursor: pointer;
+      @media (min-width: 50rem) {
+        display: none;
+      }
+    }
   }
 }
