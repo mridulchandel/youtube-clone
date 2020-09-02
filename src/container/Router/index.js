@@ -27,6 +27,7 @@ import SideBarModal from "../../component/SideBarModal";
 import BackDrop from "../../component/common/Backdrop";
 
 const Router = (props) => {
+  let showBar = false;
   const history = useHistory();
   const [selectedNav, setSelectedNav] = useState("Home");
   const [searchValue, setSearchValue] = useState("");
@@ -72,16 +73,13 @@ const Router = (props) => {
 
   return (
     <>
-      {showSideBar && (
-        <>
-          <BackDrop onDismiss={() => setShowSideBar(false)} />
-          <SideBarModal
-            listGroup={listGroup}
-            selectedNav={selectedNav}
-            handleNavigationClick={handleNavigationClick}
-          />
-        </>
-      )}
+      <BackDrop show={showSideBar} onDismiss={() => setShowSideBar(false)} />
+      <SideBarModal
+        listGroup={listGroup}
+        selectedNav={selectedNav}
+        show={showSideBar}
+        handleNavigationClick={handleNavigationClick}
+      />
 
       <Header
         searchValue={searchValue}

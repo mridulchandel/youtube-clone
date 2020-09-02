@@ -21,7 +21,7 @@ const VideoListCard = ({
       <Card.Img variant="top" src={thumbnail.url} />
       <Card.Body>
         <div className="title">{title}</div>
-        <Card.Text class="text">
+        <Card.Text className="text">
           {channelTitle} &middot;
           {`\n${views} views`} &middot; {`${uploaded} ago`}
         </Card.Text>

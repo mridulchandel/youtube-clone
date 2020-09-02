@@ -3,8 +3,12 @@ import PropTypes from "prop-types";
 
 import "./style.scss";
 
-function Backdrop({ onDismiss }) {
-  return <div className="backdrop" onClick={onDismiss}></div>;
+function Backdrop({ show, onDismiss }) {
+  const classes = ["backdrop"];
+  if (show) {
+    classes.push("showBackdrop");
+  }
+  return <div className={classes.join(" ")} onClick={onDismiss}></div>;
 }
 
 Backdrop.propTypes = {};

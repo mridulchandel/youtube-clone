@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   justify-content: center;
   background-color: var(--light-gray);
+  flex: 1;
   & > * {
     flex-basis: 24%;
     min-width: 15rem;

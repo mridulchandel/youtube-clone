@@ -7,9 +7,9 @@ import { isEmpty } from "lodash";
 
 import { getSearchVideos } from "../../action";
 import SideBar from "../SideBar";
-import SearchVideosList from "../../component/SearchVideosList";
 import { getSearchParam } from "../../utility/utility";
-
+import SearchVideoList from "../SearchVideoList";
+import "./style.scss";
 const Search = ({ listGroup, selectedNav, handleNavigationClick }) => {
   const dispatch = useDispatch();
   const reduxState = useSelector((state) => state.videoSearch);
@@ -21,58 +21,59 @@ const Search = ({ listGroup, selectedNav, handleNavigationClick }) => {
     dispatch(getSearchVideos(searchValue));
   }, [searchValue, getSearchVideos]);
 
-  let history = useHistory();
-  const handleVideoClick = (videoId) => {
-    history.push(`watch?v=${videoId}`);
-  };
-
   const handlingVideoList = () => {
-    if (!isEmpty(reduxState)) {
-      if (!isEmpty(reduxState.fetchSearchVideos)) {
-        return reduxState.fetchSearchVideos.map((videoDetail) => {
-          const {
-            videoId,
-            title,
-            channelTitle,
-            thumbnails,
-            channelId,
-            publishedAt,
-            views,
-          } = videoDetail;
-          return (
-            <SearchVideosList
-              key={videoId}
-              title={title}
-              channelTitle={channelTitle}
-              views={views}
-              thumbnail={thumbnails.medium}
-              videoId={videoId}
-              handleVideoClick={handleVideoClick}
-            />
-          );
-        });
-      } else if (!isEmpty(reduxState.searchErrorMsg)) {
-        return <p>{reduxState.searchErrorMsg}</p>;
-      } else {
-        return <p>Loading...</p>;
-      }
+    if (isEmpty(reduxState.searchErrorMsg)) {
+      return (
+        <SearchVideoList
+          fetchedVideos={reduxState && reduxState.fetchSearchVideos}
+        />
+      );
+    } else {
+      return <p>{reduxState.searchErrorMsg}</p>;
     }
   };
 
+  // const handlingVideoList = () => {
+  //   if (!isEmpty(reduxState)) {
+  //     if (!isEmpty(reduxState.fetchSearchVideos)) {
+  //       return reduxState.fetchSearchVideos.map((videoDetail) => {
+  //         const {
+  //           videoId,
+  //           title,
+  //           channelTitle,
+  //           thumbnails,
+  //           channelId,
+  //           publishedAt,
+  //           views,
+  //         } = videoDetail;
+  //         return (
+  //           <SearchVideosList
+  //             key={videoId}
+  //             title={title}
+  //             channelTitle={channelTitle}
+  //             views={views}
+  //             thumbnail={thumbnails.medium}
+  //             videoId={videoId}
+  //             handleVideoClick={handleVideoClick}
+  //           />
+  //         );
+  //       });
+  //     } else if (!isEmpty(reduxState.searchErrorMsg)) {
+  //       return <p>{reduxState.searchErrorMsg}</p>;
+  //     } else {
+  //       return <p>Loading...</p>;
+  //     }
+  //   }
+  // };
+
   return (
-    <div>
-      <Row>
-        <Col xs={2} className="p-0">
-          <SideBar
-            listGroup={listGroup}
-            selectedNav={selectedNav}
-            handleNavigationClick={handleNavigationClick}
-          />
-        </Col>
-        <Col xs={10} className="p-0">
-          {handlingVideoList()}
-        </Col>
-      </Row>
+    <div className="searchScreen">
+      <SideBar
+        listGroup={listGroup}
+        selectedNav={selectedNav}
+        handleNavigationClick={handleNavigationClick}
+      />
+      {handlingVideoList()}
     </div>
   );
 };
