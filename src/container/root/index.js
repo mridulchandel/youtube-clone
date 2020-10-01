@@ -18,7 +18,7 @@ const Root = () => {
 
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename="/youtube-clone">
         <Router />
       </BrowserRouter>
     </Provider>

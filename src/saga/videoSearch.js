@@ -24,8 +24,8 @@ function* search(action, LOADING, VIDEO_SUCCESS, VIDEO_FAIL) {
     const getApi = action.searchValue
       ? getSearchApi(action.searchValue)
       : getSearchApi();
-    // const data = yield call(getData, getApi);
-    const data = YOUTUBEDATA;
+    const data = yield call(getData, getApi);
+    // const data = YOUTUBEDATA;
     data.success = true;
     if (data.success) {
       const fetchData = data.items.map((item) => {
